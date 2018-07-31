@@ -24,9 +24,12 @@ var parseJSON = function(json) {
   var parseString = function() {
     var result = '';
     while (json[i] !== '"') {
+      console.log(`index is ${i}`);
       result += json[i];
       i++;
     }
+
+    console.log(`index is ${i}`);
     return result;
   };
 
