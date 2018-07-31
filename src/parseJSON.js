@@ -10,7 +10,17 @@ var parseJSON = function(json) {
       return parseString();
     } else if (isNumber(json[i])) {
       return parseNumber();
+    } else if (isBoolean(json[i])) {
+      return parseBoolean();
+    } else if (isArray(json[i])) {
+      return parseArray();
+    } else {
+      return `you got to the else part of parseController.`;
     }
+  };
+
+  var isBoolean = function() {
+    return json.slice(i, i + 4) === 'true' || json.slice(i, i + 5) === 'false';
   };
 
   var isString = function(char) {
@@ -21,15 +31,29 @@ var parseJSON = function(json) {
     return !isNaN(char);
   };
 
+  var isArray = function(char) {
+    return char === '[';
+  };
+
+  var parseBoolean = function() {
+    if (json.slice(i, i + 4) === 'true') {
+      i += 4;
+      return true;
+    } else {
+      i += 5;
+      return false;
+    }
+  };
+
   var parseString = function() {
     var result = '';
+    i++;
+
     while (json[i] !== '"') {
-      console.log(`index is ${i}`);
       result += json[i];
       i++;
     }
 
-    console.log(`index is ${i}`);
     return result;
   };
 
@@ -41,6 +65,21 @@ var parseJSON = function(json) {
     }
 
     return Number(result);
+  };
+
+  var parseArray = function() {
+    var result = [];
+    i++;
+
+    while(json[i] !== ']') {
+      if (json[i] === ',') {
+        i++;
+      }
+
+      result.push(parseController());
+    }
+
+    return result;
   };
 
   return parseController();
