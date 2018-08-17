@@ -12,11 +12,11 @@ var parseJSON = function(json) {
       return parseNumber();
     } else if (isBoolean(json[i])) {
       return parseBoolean();
-    } else if (isArray(json[i])) {
-      return parseArray();
-    } else {
-      return `you got to the else part of parseController.`;
-    }
+   } //else if (isArray(json[i])) {
+    //   return parseArray();
+    // } else {
+    //   return `you got to the else part of parseController.`;
+    // }
   };
 
   var isBoolean = function() {
@@ -67,20 +67,20 @@ var parseJSON = function(json) {
     return Number(result);
   };
 
-  var parseArray = function() {
-    var result = [];
-    i++;
+  // var parseArray = function() {
+  //   var result = [];
+  //   i++;
 
-    while(json[i] !== ']') {
-      if (json[i] === ',') {
-        i++;
-      }
+  //   while(json[i] !== ']') {
+  //     if (json[i] === ',') {
+  //       i++;
+  //     }
 
-      result.push(parseController());
-    }
+  //     result.push(parseController());
+  //   }
 
-    return result;
-  };
+  //   return result;
+  // };
 
   return parseController();
 };
